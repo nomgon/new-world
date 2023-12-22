@@ -9,21 +9,20 @@ export default ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const state = useContext(UserContext);
-  console.log("======" + state.isLoggedIn + "=======")
+  console.log("======" + state.isLoggedIn + "=======");
 
   const loginHandler = () => {
     setError(null);
     if (email.length == 0) {
-      Alert.alert('email field is empty, please enter user email');
+      Alert.alert("Имэйлээ оруулна уу, хоосон байна");
       return;
     }
     if (password.length == 0) {
-      Alert.alert('password field is empty, please enter password');
+      Alert.alert("Нууц үгээ оруулна уу, хоосон байна");
       return;
     }
     state.login(email, password, navigation);
   };
-
 
   return (
     <View>
@@ -35,36 +34,37 @@ export default ({ navigation }) => {
         style={{
           textAlign: "center",
           fontSize: 20,
-          marginTop: 10,
-          color: "gray"
+          marginTop: 20,
+          color: "gray",
         }}
       >
-        Login
+        Нэвтрэх
       </Text>
 
-      {error &&
-        <Text style={{ margin: 30, textAlign: 'center', color: 'red' }}>
+      {error && (
+        <Text style={{ margin: 30, textAlign: "center", color: "red" }}>
           {error}
-        </Text>}
+        </Text>
+      )}
       <MyInput
         value={email}
         keyboardType="email-address"
-        placeholder="Please enter your e-mail address"
+        placeholder="Имэйл хаягаа оруулна уу"
         onChangeText={setEmail}
       />
       <MyInput
         value={password}
         secureTextEntry={true}
-        placeholder="Please enter your password"
+        placeholder="Нэвтрэх нууц үгээ оруулна уу"
         onChangeText={setPassword}
       />
       <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-        <MyButton title="Back" onPress={() => navigation.goBack()} />
-        <MyButton title="Login" onPress={loginHandler} />
+        <MyButton title="Буцах" onPress={() => navigation.goBack()} />
+        <MyButton title="Нэвтрэх" onPress={loginHandler} />
       </View>
     </View>
   );
-}
+};
 
 const css = StyleSheet.create({
   inputField: {
@@ -72,9 +72,9 @@ const css = StyleSheet.create({
     borderBottomWidth: 1,
     marginHorizontal: 20,
     marginVertical: 10,
-    padding: 10
+    padding: 10,
   },
   button: {
-    marginVertical: 5
-  }
+    marginVertical: 5,
+  },
 });

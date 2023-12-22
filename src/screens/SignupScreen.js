@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { View, Text, Image, StyleSheet, Alert } from "react-native";
 import MyButton from "../components/MyButton";
 import MyInput from "../components/MyInput";
-import UserContext from '../context/UserContext';
+import UserContext from "../context/UserContext";
 
 export default function ({ navigation }) {
   const [name, setName] = useState("");
@@ -10,26 +10,24 @@ export default function ({ navigation }) {
   const [password1, setPassword1] = useState("");
   const [password2, setPassword2] = useState("");
   const [error, setError] = useState(null);
-
   const state = useContext(UserContext);
-
 
   const signupHandler = () => {
     setError(null);
     if (name.length == 0) {
-      Alert.alert('name field is empty, please enter user name');
+      Alert.alert("Нэрээ оруулна уу, хоосон байна");
       return;
     }
     if (email.length == 0) {
-      Alert.alert('email field is empty, please enter email address');
+      Alert.alert("Имэйл хаягаа оруулна уу, хоосон байна");
       return;
     }
     if (password1 !== password2) {
-      Alert.alert('passwords are not same');
+      Alert.alert("Нууц үгнүүд ижил биш байна");
       return;
     }
 
-    state.signUp(name, email, password1)
+    state.signUp(name, email, password1);
   };
   return (
     <View>
@@ -41,46 +39,47 @@ export default function ({ navigation }) {
         style={{
           textAlign: "center",
           fontSize: 20,
-          marginTop: 10,
-          color: "gray"
+          marginTop: 20,
+          color: "gray",
         }}
       >
-        New user registration
+        Бүртгүүлэх
       </Text>
-      {error &&
-        <Text style={{ margin: 30, textAlign: 'center', color: 'red' }}>
+      {error && (
+        <Text style={{ margin: 30, textAlign: "center", color: "red" }}>
           {error}
-        </Text>}
+        </Text>
+      )}
 
       <MyInput
         value={name}
         keyboardType="default"
-        placeholder="Please enter your name"
+        placeholder="Нэрээ оруулна уу"
         onChangeText={setName}
       />
       <MyInput
         value={email}
         keyboardType="email-address"
-        placeholder="Please enter your e-mail address"
+        placeholder="Имэйл хаягаа оруулна уу"
         onChangeText={setEmail}
       />
 
       <MyInput
         value={password1}
         secureTextEntry={true}
-        placeholder="Please enter password for entrance"
+        placeholder="Нууц үг үүсгэнэ үү"
         onChangeText={setPassword1}
       />
 
       <MyInput
         value={password2}
         secureTextEntry={true}
-        placeholder="Please repeat above password"
+        placeholder="Нууц үгээ давтана уу"
         onChangeText={setPassword2}
       />
       <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-        <MyButton title="Back" onPress={() => navigation.goBack()} />
-        <MyButton title="Register" onPress={signupHandler} />
+        <MyButton title="Буцах" onPress={() => navigation.goBack()} />
+        <MyButton title="Бүртгүүлэх" onPress={signupHandler} />
       </View>
     </View>
   );
@@ -92,10 +91,9 @@ const css = StyleSheet.create({
     borderBottomWidth: 1,
     marginHorizontal: 20,
     marginVertical: 10,
-    padding: 10
+    padding: 10,
   },
   button: {
-    marginVertical: 5
-  }
+    marginVertical: 5,
+  },
 });
-

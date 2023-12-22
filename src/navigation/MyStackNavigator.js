@@ -21,10 +21,10 @@ export default () => (
     initialRouteName="Home"
   >
     <Stack.Screen
-      name="BookStore"
+      name="Home"
       component={HomeScreen}
       options={({ navigation }) => ({
-        title: "New world bookstore",
+        title: "Үүсгэн байгуулагчид",
       })}
     />
 
@@ -32,10 +32,10 @@ export default () => (
       name="Detail"
       component={BookDetailScreen}
       options={({ navigation }) => ({
-        title: "Book detail",
+        title: "",
         headerBackTitleVisible: true,
-        headerBackTitle: "뒤로",
-        headerTruncatedBackTitle: "뒤",
+        headerBackTitle: "буцах",
+        headerTruncatedBackTitle: "буц",
       })}
     />
   </Stack.Navigator>

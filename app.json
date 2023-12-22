@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "New World",
-    "slug": "newWorld",
+    "name": "motherland",
+    "slug": "motherland",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/adaptive-icon.png",
@@ -14,12 +14,12 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "school.siip.bookstore",
+      "bundleIdentifier": "school.siip.motherland",
       "buildNumber": "1.0.0"
     },
     "android": {
       "versionCode": 1,
-      "package": "school.siip.bookstore",
+      "package": "school.siip.motherland",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -35,7 +35,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "ea5c11e3-0783-4ab3-ba32-d92e7fd8ffff"
+        "projectId": "b755735e-1295-484e-9631-af25d4bb1d2a"
       }
     }
   }

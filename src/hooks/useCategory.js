@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { restApiUrl } from "../Constant";
+import * as Permissions from "expo-permissions";
+import { Alert } from "react-native";
 
 export default () => {
   const [categories, setCategories] = useState([]);
@@ -12,15 +15,21 @@ export default () => {
 
   useEffect(() => {
     setLoading(true);
+    async function requestInternetPermission() {
+      const { status } = await Permissions.askAsync(Permissions.INTERNET);
+      if (status !== "granted") {
+        Alert.alert("Интернет холболтыг зөвшөөрнө үү");
+      }
+    }
     axios
-      .get("http://192.168.1.3:8000/api/v1/categories")
-      .then(result => {
+      .get(`${restApiUrl}/api/v1/categories`)
+      .then((result) => {
         console.log("Категорийг амжилттай хүлээж авлаа...");
         setCategories(result.data.data);
         setErrorMessage(null);
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         setLoading(false);
         let message = err.message;
         if (message === "Request failed with status code 404")

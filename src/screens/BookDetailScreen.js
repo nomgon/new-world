@@ -18,24 +18,24 @@ const BookDetailScreen = (props) => {
   const userState = useContext(UserContext);
 
   const removeBook = () => {
-    Alert.alert("Attention", "Are you sure to delete this book information?", [
+    Alert.alert("Анхаар", "Энэ мэдээллийг устгахдаа итгэлтэй байна уу?", [
       {
-        text: "Cancel",
+        text: "Цуцлах",
         onPress: () => {},
       },
       {
-        text: "Delete",
+        text: "Устгах",
         onPress: () => {
           deleteBook(book._id)
             .then((result) => {
               console.log("Book is removed as successfully.", result.data.data);
-              props.navigation.navigate("BookStore", {
+              props.navigation.navigate("Home", {
                 deletedBook: result.data.data,
               });
             })
             .catch((err) => {
               Alert.alert(
-                "Book is not removed from dataBase. ",
+                "Мэдээлэл бүрэн устгагдлаа. ",
                 err.response.data.error.message
               );
               console.log(err.response.data.error.message);
@@ -82,21 +82,25 @@ const BookDetailScreen = (props) => {
       </Text>
       <View style={{ marginHorizontal: 100, marginTop: 10 }}>
         {userState.userRole === "admin" && (
-          <Button title="Delete book" color="#00a8ff" onPress={removeBook} />
+          <Button
+            title="Мэдээллийг устгах"
+            color="#00a8ff"
+            onPress={removeBook}
+          />
         )}
       </View>
       <View style={{ marginHorizontal: 150, marginBottom: 90, marginTop: 10 }}>
         <Button
-          title="Back"
+          title="Буцах"
           color="#00a8ff"
           onPress={() => {
-            Alert.alert("Attention", "Are you sure to back?", [
+            Alert.alert("Анхаар", "Энэ хуудаснаас гарах гэж байна уу", [
               {
-                text: "Cancel",
+                text: "үгүй",
                 onPress: () => console.log("cancel"),
               },
               {
-                text: "Back",
+                text: "тийм",
                 onPress: () => props.navigation.goBack(),
               },
             ]);

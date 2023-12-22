@@ -9,7 +9,7 @@ import SplashScreen from "../screens/SplashScreen";
 import DrawerContent from "../components/DrawerContent";
 import BookAdd from "../screens/BookAdd";
 import SettingsScreen from "../screens/SettingsScreen";
-
+import Target from "../screens/Target";
 const Drawer = createDrawerNavigator();
 
 export default () => {
@@ -21,16 +21,18 @@ export default () => {
 
   return (
     <Drawer.Navigator
-      initialRouteName="Book store"
+      initialRouteName="Үүсгэн байгуулагчид"
       drawerContent={(props) => <DrawerContent {...props} />}
     >
-      <Drawer.Screen name="Book Store" component={MyStackNavigator} />
+      <Drawer.Screen name="Үүсгэн байгуулагчид" component={MyStackNavigator} />
+      <Drawer.Screen name="Зорилго" component={Target} />
       {state.isLoggedIn ? (
         <>
           {state.userRole === "admin" && (
-            <Drawer.Screen name="Add new book" component={BookAdd} />
+            <Drawer.Screen name="Нэмж оруулах" component={BookAdd} />
           )}
-          <Drawer.Screen name="Settings" component={SettingsScreen} />
+
+          <Drawer.Screen name="Тохиргоо" component={SettingsScreen} />
           <Drawer.Screen
             name="Logout"
             component={HomeScreen}
@@ -41,8 +43,8 @@ export default () => {
         </>
       ) : (
         <>
-          <Drawer.Screen name="Registration" component={SignupScreen} />
-          <Drawer.Screen name="Login" component={LoginScreen} />
+          <Drawer.Screen name="Бүртгэл" component={SignupScreen} />
+          <Drawer.Screen name="Нэвтрэх" component={LoginScreen} />
         </>
       )}
     </Drawer.Navigator>

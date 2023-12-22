@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-const thousandify = require("thousandify");
 import { useNavigation } from "@react-navigation/native";
 import Detail from "../screens/BookDetailScreen";
 import { restApiUrl } from "../Constant";
 
+const thousandify = require("thousandify");
 const Book = ({ data }) => {
   const navigation = useNavigation();
   console.log(data.id);
@@ -32,8 +32,9 @@ const Book = ({ data }) => {
       <Text
         style={{
           marginLeft: 10,
-          fontSize: 12,
+          fontSize: 14,
           marginTop: 10,
+          fontWeight: "bold",
         }}
       >
         {data.name}
@@ -52,13 +53,14 @@ const Book = ({ data }) => {
           alignItems: "center",
         }}
       >
-        <Text style={{ marginRight: 10, fontSize: 18, fontWeight: "bold" }}>
-          {thousandify(data.price)}$
+        <Text style={{ marginRight: 10, fontSize: 14, fontWeight: "bold" }}>
+          {/* {thousandify(data.price)}$ */}
+          {data.price}
         </Text>
 
-        <Text style={{ marginRight: 10, fontSize: 12, color: "gray" }}>
+        {/* <Text style={{ marginRight: 10, fontSize: 12, color: "gray" }}>
           {data.balance > 0 ? `${data.balance} pcs` : null}
-        </Text>
+        </Text> */}
       </View>
     </TouchableOpacity>
   );

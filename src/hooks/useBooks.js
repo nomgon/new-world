@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { restApiUrl } from "../Constant";
 
-export default (categoryId, searchText, refreshCategories, setRefreshCategories) => {
+export default (
+  categoryId,
+  searchText,
+  refreshCategories,
+  setRefreshCategories
+) => {
   const [books, setBooks] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const searchBook = searchValue => {
+  const searchBook = (searchValue) => {
     console.log(searchValue + " түлхүүр үгээр хайлт эхэллээ...");
   };
 
@@ -23,16 +29,16 @@ export default (categoryId, searchText, refreshCategories, setRefreshCategories)
 
     axios
       .get(
-        `http://192.168.1.3:8000/api/v1/categories/${categoryId}/books?limit=${limit}${search}`
+        `${restApiUrl}/api/v1/categories/${categoryId}/books?limit=${limit}${search}`
       )
-      .then(result => {
+      .then((result) => {
         console.log("Номнуудыг амжилттай хүлээж авлаа...");
         setBooks(result.data.data);
         setErrorMessage(null);
         setLoading(false);
         setRefreshCategories(false);
       })
-      .catch(err => {
+      .catch((err) => {
         let message = err.message;
         if (message === "Request failed with status code 404")
           message = "Уучлаарай сэрвэр дээр энэ өгөгдөл байхгүй байна...";

@@ -10,7 +10,7 @@ const Search = ({ value, onValueChange, onFinishEnter }) => {
       <TextInput
         onChangeText={onValueChange}
         style={css.searchText}
-        placeholder="search book"
+        placeholder="хайлт"
         placeholderTextColor="#2d3436"
         autoCapitalize="none"
         autoCorrect={false}

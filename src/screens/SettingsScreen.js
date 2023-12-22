@@ -15,8 +15,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Notifications from "expo-notifications";
 // import * as Permissions from "expo-permissions";
 import { expo } from "../../app.json";
+import Target from "./Target";
+// import { useNavigation } from "@react-navigation/native";
 
 const SettingsScreen = (props) => {
+  // const navigation = useNavigation();
   const [alarm, setAlarm] = useState(false);
   const [notificationID, setNotificationID] = useState(null);
   const projectId = expo.projectId;
@@ -29,21 +32,21 @@ const SettingsScreen = (props) => {
   useEffect(() => {
     const notificationResponseReceivedListener =
       Notifications.addNotificationResponseReceivedListener((response) => {
-        Alert.alert("사용자 notification 위에 눌렀어요!!");
+        Alert.alert("Зорилго сануулсанд баярлалаа!");
         console.log("돌려 받은 response 내용", response);
       });
     const notificationRecievedListener =
       Notifications.addNotificationReceivedListener((notification) =>
-        Alert.alert("Attention", notification.request.content.data.message, [
+        Alert.alert("Анхаар!!!", notification.request.content.data.message, [
           {
-            text: "직접 보기",
+            text: "Харах",
             onPress: () => {
-              props.navigation.navigate("Detail", {
-                id: notification.request.content.data.id,
-              });
+              // props.navigation.navigate("Detail", {
+              //   id: notification.request.content.data.id,
+              props.navigation.navigate("Зорилго");
             },
           },
-          { text: "취소", onPress: () => {} },
+          { text: "Цуцлах", onPress: () => {} },
         ])
       );
 
@@ -68,7 +71,7 @@ const SettingsScreen = (props) => {
     //     console.log(result);
     //     if (result.status === "granted") {
     //       Notifications.getExpoPushTokenAsync({
-    //         projectId: "84601102-a982-4b04-a876-e637140c2839",
+    //         projectId: "b755735e-1295-484e-9631-af25d4bb1d2a",
     //       }).then((result) => console.log("Expo result: ", result));
     //     }
     //   })
@@ -79,7 +82,7 @@ const SettingsScreen = (props) => {
         console.log(result);
         if (result.status === "granted") {
           Notifications.getExpoPushTokenAsync({
-            projectId: "84601102-a982-4b04-a876-e637140c2839",
+            projectId: "b755735e-1295-484e-9631-af25d4bb1d2a",
           }).then((result) => console.log("Expo result: ", result));
         }
       })
@@ -141,11 +144,12 @@ const SettingsScreen = (props) => {
       if (newValue) {
         Notifications.scheduleNotificationAsync({
           content: {
-            title: "book SALE!",
-            body: "어떤 책이 세일되었는지 서둘러 확인하세요!",
+            title: "Зорилгоо сана !!!",
+            body: "Бидэнд ямар зорилго байгааг дахин нэг харна уу",
             data: {
               id: "653f47b15a9d192d6a5c4e58",
-              message: "60초마다 50% 힐인받을 수 있게 됐다!!!",
+              message:
+                "1 өгүүлбэрийн цаана Монгол улс, үндэстний бүх хөгжил, дэвшил, боломж, амжилт, амьд үлдэх арга байна!!!",
             },
           },
           trigger: {
@@ -183,10 +187,10 @@ const SettingsScreen = (props) => {
         }}
       >
         <Text style={{ fontSize: 24, color: lightColor }}>
-          - Settings for local notification
+          - Зорилгыг сануулах болон бусад мэдэгдлийн тохиргоо
         </Text>
         <Text style={{ fontSize: 16, color: lightColor, marginTop: 10 }}>
-          Please set alarm on book SALE
+          Хэрэглэгчийн тохируулгууд энд нэмэгдэнэ.
         </Text>
       </View>
       <Animatable.View
@@ -203,11 +207,11 @@ const SettingsScreen = (props) => {
       >
         <ScrollView>
           <FormSwitch
-            label="Remind book SALE or not"
+            label="Зорилгыг өдөр бүр сануулах эсэх"
             icon="clock"
             value={alarm}
             onChangeValue={toggleAlarm}
-            data={["remind me book sale", "do not remind me"]}
+            data={["сануулга хүлээн авна", "сануулга хүлээн авахгүй"]}
           />
         </ScrollView>
       </Animatable.View>

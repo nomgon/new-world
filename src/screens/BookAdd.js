@@ -32,7 +32,7 @@ const BookAdd = (props) => {
 
     console.log(result);
 
-    if (!result.canceled) {
+    if (!result.canceled || !result.cancelled) {
       setBook({ ...book, photo: result.assets[0].uri });
     }
   };
@@ -46,11 +46,11 @@ const BookAdd = (props) => {
     photo: "",
     content: "",
     rating: 4.0,
-    balance: 7,
+    balance: 0,
     price: "",
     author: "",
     bestseller: true,
-    available: ["new", "old"],
+    available: ["old", "new"],
     category: "null",
   });
   const [error, setError] = useState({
@@ -115,7 +115,7 @@ const BookAdd = (props) => {
           setSavingToServer(false);
         });
     } else {
-      Alert.alert("Please choose category");
+      Alert.alert("10тыг сонгоно уу");
     }
   };
   const toggleBestSeller = () => {
@@ -134,7 +134,7 @@ const BookAdd = (props) => {
 
     setError({
       ...error,
-      name: text.length < 5 || text.length > 31,
+      name: text.length < 5 || text.length > 61,
     });
 
     setBook({
@@ -145,13 +145,14 @@ const BookAdd = (props) => {
   const checkAuthor = (text) => {
     setError({
       ...error,
-      author: text.length < 4 || text.length > 21,
+      author: text.length < 5 || text.length > 91,
     });
     setBook({
       ...book,
       author: text,
     });
   };
+
   const checkPrice = (text) => {
     setError({
       ...error,
@@ -165,7 +166,7 @@ const BookAdd = (props) => {
   const checkContent = (text) => {
     setError({
       ...error,
-      content: text.length > 1001,
+      content: text.length < 1001,
     });
     setBook({
       ...book,
@@ -183,7 +184,7 @@ const BookAdd = (props) => {
             marginRight: 50,
           }}
         >
-          책 이미지를 서버로 업로드 중, 잠시만 기다려 주세요
+          Зургийг сэрвэр рүү ачаалж байна...
         </Text>
         <View style={{ height: 30, backgroundColor: "#d63031", width: 100 }}>
           <View
@@ -214,10 +215,10 @@ const BookAdd = (props) => {
         }}
       >
         <Text style={{ fontSize: 24, color: lightColor }}>
-          - New book which will be added
+          Үүсгэн байгуулагчийг нэмэх
         </Text>
         <Text style={{ fontSize: 16, color: lightColor, marginTop: 10 }}>
-          Please enter new book related information as detail
+          Зорилго, үзэл баримтлал ижил тохиолдолд бүртгүүлнэ
         </Text>
       </View>
       <Animatable.View
@@ -251,7 +252,10 @@ const BookAdd = (props) => {
                 justifyContent: "center",
               }}
             >
-              <Button title="Choose photo" onPress={pickImage} />
+              <Button
+                title="Утаснаас зураг оруулах (5MB-аас ихгүй)"
+                onPress={pickImage}
+              />
               {book.photo && (
                 <Image
                   source={{ uri: book.photo }}
@@ -260,54 +264,55 @@ const BookAdd = (props) => {
               )}
             </View>
             <FormText
-              label="Enter book title"
-              placeHolder="title of book"
-              icon="book"
+              label="Үүсгэн байгуулагчийн овог нэр"
+              placeHolder="Бэгзийн ГИВААН гэх мэтээр оруулна уу"
+              icon="user"
               value={book.name}
               onChangeText={checkName}
-              errorText="Book title must be at least 4 at most 30 letters"
+              errorText="4-60 тэмдэгт байна."
               errorShow={error.name}
             />
             <FormText
-              label="Enter author name"
-              placeHolder="author name"
-              icon="user"
+              label="Facebook хаягийн холбоос"
+              placeHolder="facebook.com/batjargal.gochoosuren.5"
+              icon="facebook"
               value={book.author}
               onChangeText={checkAuthor}
-              errorText="Author name must be 4-20 letters"
+              errorText="4-90 тэмдэгт байна"
               errorShow={error.author}
             />
+
             <FormText
-              label="Enter price"
-              placeHolder="per book price"
-              icon="dollar-sign"
+              label="Утасны дугаар"
+              placeHolder="зөвхөн 1 дугаар оруулна уу"
+              icon="phone"
               keyboardType="numeric"
               value={book.price}
               onChangeText={checkPrice}
-              errorText="Book price must be at least 5 USD"
+              errorText="Утасны дугаарыг бүрэн оруулна уу"
               errorShow={error.price}
             />
             <FormText
-              label="Enter brief content"
-              placeHolder="at most 1000 letters will be settled for brief"
-              icon="edit-3"
+              label="Хаяг, Ажил мэргэжил"
+              placeHolder="гэрийн хаяг, ажил мэргэжил"
+              icon="anchor"
               multiline
               numberOfLines={10}
               value={book.content}
               onChangeText={checkContent}
-              errorText="Brief content must be at most 1000 letters"
+              errorText="1000 тэмдэгтээс илүүгүй байна"
               errorShow={error.content}
             />
             <FormSwitch
-              label="Bestseller or not"
+              label="Сонгуульд нэр дэвших эсэх"
               icon="trending-up"
               value={book.bestseller}
               onChangeValue={toggleBestSeller}
-              data={["This book is bestseller", "This book is not bestseller"]}
+              data={["Нэр дэвшинэ", "Нэр дэвшихгүй"]}
             />
 
             <FormPicker
-              label="Choose category:"
+              label="Харъяалагдах АРАВТ-ыг сонгох"
               icon="layers"
               data={categories.map((el) => el.name)}
               value={categories.map((el) => el._id)}
@@ -321,10 +326,10 @@ const BookAdd = (props) => {
               style={{ flexDirection: "row", justifyContent: "space-evenly" }}
             >
               <MyButton
-                title="Back"
+                title="Буцах"
                 onPress={() => props.navigation.goBack()}
               />
-              <MyButton title="send to Server" onPress={sendBookToServer} />
+              <MyButton title="Бүртгүүлэх" onPress={sendBookToServer} />
             </View>
           </ScrollView>
         )}

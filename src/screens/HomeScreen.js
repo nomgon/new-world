@@ -52,7 +52,12 @@ const HomeScreen = ({ navigation, route }) => {
       //     />
       //   </HeaderButtons>
       // )
-      title: state.userName ? "Welcome " + state.userName : "New world",
+      title: state.userName
+        ? "Сайн байна уу " + state.userName
+        : "Улсын эрх ашиг, тусгаар тогтнолын нам",
+      headerTitleStyle: {
+        fontSize: 18,
+      },
     });
   }, [navigation, localSearchText, state.userName]);
 
