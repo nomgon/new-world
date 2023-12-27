@@ -44,7 +44,7 @@ export default (
           message = "Уучлаарай сэрвэр дээр энэ өгөгдөл байхгүй байна...";
         else if (message === "Network Error")
           message =
-            "Сэрвэр ажиллахгүй байна. Та түр хүлээгээд дахин оролдоно уу.";
+            "Сэрвэр ажиллахгүй байна. Та түр хүлээгээд дахин оролдоно уу!!!!";
         setErrorMessage(message);
         setLoading(false);
       });

@@ -2,7 +2,7 @@
   "expo": {
     "name": "motherland",
     "slug": "motherland",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/adaptive-icon.png",
     "userInterfaceStyle": "light",
@@ -15,7 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "school.siip.motherland",
-      "buildNumber": "1.0.0"
+      "buildNumber": "1.0.2"
     },
     "android": {
       "versionCode": 1,
@@ -27,9 +27,11 @@
     },
     "plugins": [
       [
-        "expo-notifications",
+        "expo-build-properties",
         {
-          "color": "#ffffff"
+          "android": {
+            "usesCleartextTraffic": true
+          }
         }
       ]
     ],

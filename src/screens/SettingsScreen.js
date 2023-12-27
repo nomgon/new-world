@@ -153,7 +153,7 @@ const SettingsScreen = (props) => {
             },
           },
           trigger: {
-            seconds: 5,
+            seconds: 86400,
           },
         })
           .then((id) => {
